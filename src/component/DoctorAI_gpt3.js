@@ -136,7 +136,7 @@ ELI5 MATCH (d:Disease) WHERE d.name =~ '(?i)lung cancer' RETURN d.description
 
       let textToSpeak = ''
       try {
-        use_ELI5 = false;
+        let use_ELI5 = false;
         console.log("query", query)
         if (search) {
 
