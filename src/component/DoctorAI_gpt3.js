@@ -187,7 +187,7 @@ ELI5 MATCH (d:Disease) WHERE d.name =~ '(?i)lung cancer' RETURN d.description
             textToSpeak = textToSpeak.trim()
             if (use_ELI5 === true)
             {
-              textToSpeak = eli5("Summarize this for a second-grade student:\n\n", textToSpeak)
+              textToSpeak = await eli5("Summarize this for a second-grade student:\n\n", textToSpeak)
             }
             console.log("after eli5 " + textToSpeak)
 
