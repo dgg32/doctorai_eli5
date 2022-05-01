@@ -112,7 +112,7 @@ function App() {
       ) : (
         chatbot
       )}
-      <p style={{"position": "fixed", "bottom": 0, "width": "100%", "text-alig": "center", "fontSize": "32px"}} id="cypher" />
+      <p style={{"position": "fixed", "bottom": 0, "width": "75%", "text-alig": "center", "fontSize": "32px"}} id="cypher" />
       <div ref={alanBtnContainer}></div>
       
     </div>
