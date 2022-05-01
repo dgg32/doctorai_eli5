@@ -165,7 +165,7 @@ ELI5 MATCH (d:Disease) WHERE d.name =~ '(?i)lung cancer' RETURN d.description
           console.log('Doctor AI:' + cypher);
 
           var console_panel = document.getElementById("cypher");
-          console_panel.appendChild(document.createTextNode(cypher));
+          console_panel.innerText = cypher;
 
           try {
             const result = await session.run(cypher)
