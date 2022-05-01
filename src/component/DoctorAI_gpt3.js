@@ -19,8 +19,8 @@ const driver = neo4j.driver(process.env.REACT_APP_NEO4JURI, neo4j.auth.basic(pro
 const target_language = process.env.REACT_APP_LANGUAGE
 
 
+
 //const target_language = "Chinese"
-//const target_language = "English"
 
 
 //const target_language = "Japanese"
@@ -164,6 +164,9 @@ ELI5 MATCH (d:Disease) WHERE d.name =~ '(?i)lung cancer' RETURN d.description
           }
           console.log('Doctor AI:' + cypher);
 
+          var console_panel = document.getElementById("cypher");
+          console_panel.appendChild(document.createTextNode(cypher));
+
           try {
             const result = await session.run(cypher)
 
@@ -177,7 +180,7 @@ ELI5 MATCH (d:Disease) WHERE d.name =~ '(?i)lung cancer' RETURN d.description
 
             //textToSpeak = singleRecord.get(0)
             textToSpeak = textToSpeak.slice(0, -2).trim()
-            console.log("before translation " + "Translate this into " + lang_p['target_language'] + "\n\n" + textToSpeak)
+            //console.log("before translation " + "Translate this into " + lang_p['target_language'] + "\n\n" + textToSpeak)
             if (lang_p['target_language'] !== "English")
             {
               textToSpeak = await callTranslate("Translate this into " + lang_p['target_language'] + "\n\n" + textToSpeak);

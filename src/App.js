@@ -9,6 +9,7 @@ import alanBtn from "@alan-ai/alan-sdk-web";
 
 const target_language = process.env.REACT_APP_LANGUAGE
 const alan_api = process.env.REACT_APP_ALAN_API;
+
 //const target_language = "Chinese"
 //const target_language = "Japanese"
 //const target_language = "English"
@@ -111,7 +112,9 @@ function App() {
       ) : (
         chatbot
       )}
+      <p style={{"position": "fixed", "bottom": 0, "width": "100%", "text-alig": "center", "fontSize": "32px"}} id="cypher" />
       <div ref={alanBtnContainer}></div>
+      
     </div>
   );
 }
