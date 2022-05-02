@@ -124,7 +124,7 @@ ELI5 MATCH (d:Disease) WHERE d.name =~ '(?i)lung cancer' RETURN d.description
         console.log("query", query)
         if (search) {
 
-          const response = await openai.createCompletion("davinci", {
+          const response = await openai.createCompletion("text-davinci-002", {
             prompt: query,
             temperature: 0,
             max_tokens: 300,
