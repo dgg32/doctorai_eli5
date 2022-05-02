@@ -75,10 +75,10 @@ MATCH (p:Patient)-[:HAS_STAY]->(v:PatientUnitStay) WHERE p.patient_id =~ '(?i)id
 #When did patient id_1 visit the ICU?
 MATCH (p:Patient)-[:HAS_STAY]->(v:PatientUnitStay) WHERE p.patient_id =~ '(?i)id_1' RETURN v.hospitaldischargeyear
 
-#Which drug treats COVID-19? or Which kind of compound treats COVID-19?
+#Which drug treats COVID-19?; Which kind of compound treats COVID-19?
 MATCH (c:Compound)-[:treats]->(d:Disease) WHERE d.name =~ '(?i)COVID-19' RETURN c.name
 
-#Which pathogen causes COVID-19? or What is the disease agent for COVID-19? or Which organism causes COVID-19?
+#Which pathogen causes COVID-19?; What is the disease agent for COVID-19?; Which organism causes COVID-19?
 MATCH (o:Pathogen)-[:causes]->(d:Disease) WHERE d.name =~ '(?i)COVID-19' RETURN o.name
 
 #Which gene causes Christianson syndrome?
@@ -96,10 +96,10 @@ MATCH (d:Compound)-[:causes]->(s:\`Side Effect\`) WHERE d.name =~ '(?i)Doxepin' 
 #what functions does the gene PCBD1 have?
 MATCH (g:Gene)-[:participates]->(f:\`Molecular Function\`) WHERE g.name =~ '(?i)PCBD1' RETURN f.name
 
-#which kinds of cancers can be found in frontal sinus? or Which tumors can you find in frontal sinus?
+#which kinds of cancers can be found in frontal sinus?; Which tumors can you find in frontal sinus?
 MATCH (d:Disease)-[:localizes]->(a:Anatomy) WHERE a.name =~ '(?i)frontal sinus' AND (d.name CONTAINS "cancer" OR d.disease_category = "Cancer") RETURN DISTINCT(d.name)
 
-#ELI5 what is lung cancer or Explain lung cancer in simple terms or Explain lung cancer in plain English
+#ELI5 what is lung cancer; Explain lung cancer in simple terms; Explain lung cancer in plain English
 ELI5 MATCH (d:Disease) WHERE d.name =~ '(?i)lung cancer' RETURN d.description
 
 #`;
