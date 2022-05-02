@@ -75,6 +75,9 @@ MATCH (p:Patient)-[:HAS_STAY]->(v:PatientUnitStay) WHERE p.patient_id =~ '(?i)id
 #When did patient id_1 visit the ICU?
 MATCH (p:Patient)-[:HAS_STAY]->(v:PatientUnitStay) WHERE p.patient_id =~ '(?i)id_1' RETURN v.hospitaldischargeyear
 
+#What was the diagnosis of patient id_1's visit?; Why did patient id_1 visit the ICU?; What was the cause for patient id_1's visit?
+MATCH (p:Patient)-[:HAS_STAY]->(v:PatientUnitStay)-[:HAS_DIAG]->(dia:Diagnosis)-[:IS_DISEASE]->(d:Disease) WHERE p.patient_id =~ '(?i)id_1' RETURN d.name
+
 #Which drug treats COVID-19?; Which kind of compound treats COVID-19?
 MATCH (c:Compound)-[:treats]->(d:Disease) WHERE d.name =~ '(?i)COVID-19' RETURN c.name
 
