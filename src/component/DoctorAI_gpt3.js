@@ -69,41 +69,29 @@ class DoctorAI extends Component {
 
     async function callAsync() {
       let training = `
-#How many times did patient id_1 visit the ICU?
-MATCH (p:Patient)-[:HAS_STAY]->(v:PatientUnitStay) WHERE p.patient_id =~ '(?i)id_1' RETURN COUNT(v)
+#Which organism can degrade cellulose?
+MATCH (g:Genome) -[:HAS_CAZY]-> (c:Cazy) -[:DEGRADES]->(n:Substrate {substrate: "cellulose"}) RETURN g.name LIMIT 10;
 
-#When did patient id_1 visit the ICU?
-MATCH (p:Patient)-[:HAS_STAY]->(v:PatientUnitStay) WHERE p.patient_id =~ '(?i)id_1' RETURN v.hospitaldischargeyear
+#Which organism can binds cellulose?
+MATCH (g:Genome) -[:HAS_CAZY]-> (c:Cazy) -[:BINDS]->(n:Substrate {substrate: "cellulose"}) RETURN g.name LIMIT 10;
 
-#What was the diagnosis of patient id_1's visit?; Why did patient id_1 visit the ICU?; What was the cause for patient id_1's visit?
-MATCH (p:Patient)-[:HAS_STAY]->()-[:HAS_DIAG]->()-[:IS_DISEASE]->(d:Disease) WHERE p.patient_id =~ '(?i)id_1' RETURN d.name
+#Which organism has Cazy GH16?
+MATCH (g:Genome) -[:HAS_CAZY]->(c:Cazy {name:"GH16"}) RETURN g LIMIT 10;
 
-#Which drug treats COVID-19?; Which kind of compound treats COVID-19?
-MATCH (c:Compound)-[:treats]->(d:Disease) WHERE d.name =~ '(?i)COVID-19' RETURN c.name
+#Which organism has Cazy GT2?
+MATCH (g:Genome) -[:HAS_CAZY]->(c:Cazy {name:"GT2"}) RETURN g LIMIT 10;
 
-#Which pathogen causes COVID-19?; What is the disease agent for COVID-19?; Which organism causes COVID-19?
-MATCH (o:Pathogen)-[:causes]->(d:Disease) WHERE d.name =~ '(?i)COVID-19' RETURN o.name
+#Which organisms are under the genus Salinibacter?
+MATCH (t:Taxon {rank: "genus", name: "Polaribacter"})-[:HAS_TAXON|:HAS_GENOME]->(t1) RETURN t1.name LIMIT 10;
 
-#Which gene causes Christianson syndrome?
-MATCH (g:Gene)-[r1:associates]->(d:Disease) WHERE d.name =~ '(?i)Christianson syndrome' RETURN g.name
+#Which organisms are under the family Flavobacteriaceae?
+MATCH (t:Taxon {rank: "family", name: "Flavobacteriaceae"})-[:HAS_TAXON|:HAS_GENOME]->(t1) RETURN t1.name LIMIT 10;
 
-#Tell me something about the disease named "Christianson syndrome"
-MATCH (d:Disease) WHERE d.name =~ '(?i)Christianson syndrome' RETURN d.description
+#Which Cazy binds cellulose?
+MATCH (c:Cazy)-[:BINDS]->(n:Substrate {substrate: "cellulose"}) RETURN c.name LIMIT 10;
 
-#I have Dyspepsia, Hiccup and Edema. What can be the cause of this?
-MATCH (s1:Symptom) <-[:presents]- (d:Disease) WHERE s1.name =~ '(?i)Dyspepsia'  MATCH (s2:Symptom) <-[:presents]- (d:Disease) WHERE s2.name =~ '(?i)Hiccup'  MATCH (s3:Symptom) <-[:presents]- (d:Disease) WHERE s3.name =~ '(?i)Edema' RETURN d.name
-
-#what kinds of side effects do Doxepin have?
-MATCH (d:Compound)-[:causes]->(s:\`Side Effect\`) WHERE d.name =~ '(?i)Doxepin' RETURN s.name
-
-#what functions does the gene PCBD1 have?
-MATCH (g:Gene)-[:participates]->(f:\`Molecular Function\`) WHERE g.name =~ '(?i)PCBD1' RETURN f.name
-
-#which kinds of cancers can be found in frontal sinus?; Which tumors can you find in frontal sinus?
-MATCH (d:Disease)-[:localizes]->(a:Anatomy) WHERE a.name =~ '(?i)frontal sinus' AND (d.name CONTAINS "cancer" OR d.disease_category = "Cancer") RETURN DISTINCT(d.name)
-
-#ELI5 what is lung cancer; Explain lung cancer in simple terms; Explain lung cancer in plain English
-ELI5 MATCH (d:Disease) WHERE d.name =~ '(?i)lung cancer' RETURN d.description
+#Which Cazy degrades cellulose?
+MATCH (c:Cazy)-[:DEGRADES]->(n:Substrate {substrate: "cellulose"}) RETURN c.name LIMIT 10;
 
 #`;
       let search = search_raw;
