@@ -90,8 +90,14 @@ MATCH (t:Taxon {rank: "family", name: "Flavobacteriaceae"})-[:HAS_TAXON|:HAS_GEN
 #Which Cazy binds cellulose?
 MATCH (c:Cazy)-[:BINDS]->(n:Substrate {substrate: "cellulose"}) RETURN c.name LIMIT 10;
 
+#Which Cazy binds xylans?
+MATCH (c:Cazy)-[:BINDS]->(n:Substrate {substrate: "xylans"}) RETURN c.name LIMIT 10;
+
 #Which Cazy degrades cellulose?
 MATCH (c:Cazy)-[:DEGRADES]->(n:Substrate {substrate: "cellulose"}) RETURN c.name LIMIT 10;
+
+#Which Cazy degrades chitin?
+MATCH (c:Cazy)-[:DEGRADES]->(n:Substrate {substrate: "chitin"}) RETURN c.name LIMIT 10;
 
 #`;
       let search = search_raw;
