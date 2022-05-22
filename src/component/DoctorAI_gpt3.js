@@ -112,7 +112,7 @@ MATCH (c:Cazy)-[:DEGRADES]->(n:Substrate {substrate: "cellulose"}) RETURN c.name
         console.log("query", query)
         if (search) {
 
-          const response = await openai.createCompletion("text-davinci-002", {
+          const response = await openai.createCompletion("text-curie-001", {
             prompt: query,
             temperature: 0,
             max_tokens: 300,
