@@ -70,10 +70,10 @@ class DoctorAI extends Component {
     async function callAsync() {
       let training = `
 #Which organism can degrade cellulose?
-MATCH (g:Genome) -[:HAS_CAZY]-> (c:Cazy) -[:DEGRADES]->(n:Substrate {substrate: "cellulose"}) RETURN g.name LIMIT 10;
+MATCH (g:Genome) -[:HAS_CAZY]-> (c:Cazy) -[:DEGRADES]->(n:Substrate {name: "cellulose"}) RETURN g.name LIMIT 10;
 
 #Which organism can binds cellulose?
-MATCH (g:Genome) -[:HAS_CAZY]-> (c:Cazy) -[:BINDS]->(n:Substrate {substrate: "cellulose"}) RETURN g.name LIMIT 10;
+MATCH (g:Genome) -[:HAS_CAZY]-> (c:Cazy) -[:BINDS]->(n:Substrate {name: "cellulose"}) RETURN g.name LIMIT 10;
 
 #Which organism has Cazy GH16?
 MATCH (g:Genome) -[:HAS_CAZY]->(c:Cazy {name:"GH16"}) RETURN g LIMIT 10;
@@ -88,16 +88,16 @@ MATCH (t:Taxon {rank: "genus", name: "Polaribacter"})-[:HAS_TAXON|:HAS_GENOME]->
 MATCH (t:Taxon {rank: "family", name: "Flavobacteriaceae"})-[:HAS_TAXON|:HAS_GENOME]->(t1) RETURN t1.name LIMIT 10;
 
 #Which Cazy binds cellulose?
-MATCH (c:Cazy)-[:BINDS]->(n:Substrate {substrate: "cellulose"}) RETURN c.name LIMIT 10;
+MATCH (c:Cazy)-[:BINDS]->(n:Substrate {name: "cellulose"}) RETURN c.name LIMIT 10;
 
 #Which Cazy binds xylans?
-MATCH (c:Cazy)-[:BINDS]->(n:Substrate {substrate: "xylans"}) RETURN c.name LIMIT 10;
+MATCH (c:Cazy)-[:BINDS]->(n:Substrate {name: "xylans"}) RETURN c.name LIMIT 10;
 
 #Which Cazy degrades cellulose?
-MATCH (c:Cazy)-[:DEGRADES]->(n:Substrate {substrate: "cellulose"}) RETURN c.name LIMIT 10;
+MATCH (c:Cazy)-[:DEGRADES]->(n:Substrate {name: "cellulose"}) RETURN c.name LIMIT 10;
 
 #Which Cazy degrades chitin?
-MATCH (c:Cazy)-[:DEGRADES]->(n:Substrate {substrate: "chitin"}) RETURN c.name LIMIT 10;
+MATCH (c:Cazy)-[:DEGRADES]->(n:Substrate {name: "chitin"}) RETURN c.name LIMIT 10;
 
 #`;
       let search = search_raw;
