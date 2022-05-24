@@ -9,7 +9,7 @@ const openai = new OpenAIApi(configuration);
 
 async function callTranslate(instruction, raw_text) {
     let query = instruction + raw_text + "\n";
-    const response = await openai.createCompletion("text-davinci-001", {
+    const response = await openai.createCompletion("text-davinci-002", {
         prompt: query,
         temperature: 0.3,
         max_tokens: 300,
