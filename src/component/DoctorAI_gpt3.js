@@ -82,10 +82,10 @@ MATCH (g:Genome) -[:HAS_CAZY]->(c:Cazy {name:"GH16"}) RETURN g LIMIT 10;
 MATCH (g:Genome) -[:HAS_CAZY]->(c:Cazy {name:"GT2"}) RETURN g LIMIT 10;
 
 #Which genomes are under the genus Salinibacter?
-MATCH (t:Taxon {rank: "genus", name: "Salinibacter"}) WITH t AS subject MATCH  (subject)-[:HAS_TAXON]->(t1:Taxon) -[:HAS_GENOME]-> (g:Genome) WITH COLLECT(g.name) as genomes, subject as subject MATCH (subject) -[:HAS_GENOME]-> (g1:Genome) WITH genomes + COLLECT(g1.name) AS list UNWIND list as l RETURN l
+MATCH (t:Taxon {rank: "genus", name: "Salinibacter"}) WITH t AS subject MATCH  (subject)-[:HAS_TAXON]->(t1:Taxon) -[:HAS_GENOME]-> (g:Genome) WITH COLLECT(g.name) as genomes, subject as subject MATCH (subject) -[:HAS_GENOME]-> (g1:Genome) WITH genomes + COLLECT(g1.name) AS list UNWIND list as l RETURN l LIMIT 10
 
 #Which genomes are under the family Flavobacteriaceae?
-MATCH (t:Taxon {rank: "family", name: "Flavobacteriaceae"}) WITH t AS subject MATCH  (subject)-[:HAS_TAXON]->(t1:Taxon) -[:HAS_GENOME]-> (g:Genome) WITH COLLECT(g.name) as genomes, subject as subject MATCH (subject) -[:HAS_GENOME]-> (g1:Genome) WITH genomes + COLLECT(g1.name) AS list UNWIND list as l RETURN l
+MATCH (t:Taxon {rank: "family", name: "Flavobacteriaceae"}) WITH t AS subject MATCH  (subject)-[:HAS_TAXON]->(t1:Taxon) -[:HAS_GENOME]-> (g:Genome) WITH COLLECT(g.name) as genomes, subject as subject MATCH (subject) -[:HAS_GENOME]-> (g1:Genome) WITH genomes + COLLECT(g1.name) AS list UNWIND list as l RETURN l LIMIT 10
 
 #Which Cazy binds cellulose?
 MATCH (c:Cazy)-[:BINDS]->(n:Substrate {name: "cellulose"}) RETURN c.name LIMIT 10;
